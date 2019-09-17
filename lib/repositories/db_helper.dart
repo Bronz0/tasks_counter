@@ -84,5 +84,13 @@ class DBHelper {
       // Pass the Employee's id as a whereArg to prevent SQL injection.
       whereArgs: [name],
     );
+    print('$name deleted from the database !');
+  }
+
+  static Future<void> deleteAll(String tableName) async {
+    final db = await getDB();
+    await db.execute(
+      "DELETE FROM $tableName",
+    );
   }
 }

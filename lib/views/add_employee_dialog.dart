@@ -13,8 +13,8 @@ class _AddEmployeeDialogState extends State<AddEmployeeDialog> {
   String name;
   File _image;
   String base64;
-  Map<String, String> result = new Map<String, String>(); 
-  
+  Map<String, String> result = new Map<String, String>();
+
   TextEditingController controller = new TextEditingController();
 
   Future getImage() async {
@@ -65,6 +65,7 @@ class _AddEmployeeDialogState extends State<AddEmployeeDialog> {
                   TextField(
                     controller: controller,
                     autofocus: true,
+                    textCapitalization: TextCapitalization.words,
                     decoration: InputDecoration(
                       labelText: 'Employee Name',
                       hintText: 'eg. Tadjine Mohamed',
@@ -95,9 +96,11 @@ class _AddEmployeeDialogState extends State<AddEmployeeDialog> {
                       ),
                       FlatButton(
                         onPressed: () {
-                          // To close the dialog and return results
-                          Navigator.of(context)
-                              .pop(result); 
+                          if (controller.text == '') {
+                            print('empty text !');
+                          } else
+                            // To close the dialog and return results
+                            Navigator.of(context).pop(result);
                         },
                         child: Text(
                           'Add',

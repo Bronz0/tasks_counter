@@ -7,7 +7,7 @@ class EmployeItem extends StatefulWidget {
   final Employe employe;
   Function(Employe, bool) callback;
   bool isChecked;
-  EmployeItem(@required this.employe) {
+  EmployeItem(@required this.employe, this.callback) {
     this.isChecked = employe.isChecked;
   }
 
@@ -47,8 +47,9 @@ class _EmployeItemState extends State<EmployeItem> {
           onChanged: (bool value) {
             setState(() {
               widget.isChecked = !widget.isChecked;
-              widget.callback(widget.employe, widget.isChecked);
+              print('${widget.employe}, isChecked: ${widget.isChecked}');
             });
+            widget.callback(widget.employe, widget.isChecked);
           },
           value: widget.isChecked,
         ),

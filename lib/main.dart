@@ -8,7 +8,7 @@ class App extends StatelessWidget {
       debugShowCheckedModeBanner: true,
       title: 'Tasks Counter',
       home: Scaffold(
-        body: TaskCounterScreen(),
+        body: EmployeesScreen(),
       ),
     );
   }

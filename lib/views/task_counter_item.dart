@@ -1,8 +1,12 @@
+import 'dart:convert';
+
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:tasks_counter/models/models.dart';
 
 class TaskCounterItem extends StatefulWidget {
+  final Employe employee;
+  TaskCounterItem({@required this.employee}) : assert(employee != null);
   @override
   _TaskCounterItemState createState() => _TaskCounterItemState();
 }
@@ -12,6 +16,12 @@ class _TaskCounterItemState extends State<TaskCounterItem> {
   String prefix = '0';
   String name;
   String image;
+  @override
+  void initState() {
+    name = widget.employee.name;
+    image = widget.employee.image;
+    super.initState();
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -35,7 +45,7 @@ class _TaskCounterItemState extends State<TaskCounterItem> {
           ListTile(
             title: Center(
               child: Text(
-                'some title',
+                name == null ? 'Nameless !!' : name,
                 style: TextStyle(
                   fontSize: 24.0,
                   fontWeight: FontWeight.bold,
@@ -44,8 +54,10 @@ class _TaskCounterItemState extends State<TaskCounterItem> {
             ),
             leading: CircleAvatar(
               radius: 26.0,
-              child:
-                  ClipOval(child: Image.asset('assets/images/employee2.png')),
+              child: ClipOval(
+                  child: image == null
+                      ? Image.asset('assets/images/employee2.png')
+                      : Image.memory(base64Decode(image))),
             ),
           ),
           Row(
@@ -60,6 +72,7 @@ class _TaskCounterItemState extends State<TaskCounterItem> {
               ),
               // minus button
               FloatingActionButton(
+                heroTag: '${name}1',
                 backgroundColor: Colors.redAccent,
                 child: Icon(Icons.remove),
                 onPressed: () {
@@ -75,6 +88,7 @@ class _TaskCounterItemState extends State<TaskCounterItem> {
               ),
               // plus button
               FloatingActionButton(
+                heroTag: '${name}2',
                 backgroundColor: Colors.greenAccent,
                 child: Icon(Icons.add),
                 onPressed: () {

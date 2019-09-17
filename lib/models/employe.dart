@@ -3,7 +3,7 @@ class Employe {
   final String image;
   bool isChecked;
 
-  Employe({this.name, this.image, this.isChecked = false});
+  Employe({this.name = 'Nameless !!', this.image, this.isChecked = false});
 
   Map<String, dynamic> toMap() {
     return {
